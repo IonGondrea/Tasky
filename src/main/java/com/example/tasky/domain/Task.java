@@ -10,8 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "tasks")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
