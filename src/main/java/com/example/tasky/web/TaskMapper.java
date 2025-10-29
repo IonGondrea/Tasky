@@ -4,9 +4,6 @@ import com.example.tasky.domain.Task;
 import com.example.tasky.domain.TaskPriority;
 import com.example.tasky.domain.TaskStatus;
 
-import java.time.Instant;
-import java.time.LocalDate;
-
 public final class TaskMapper {
     private TaskMapper() {}
 
@@ -25,8 +22,8 @@ public final class TaskMapper {
 
     public static void updateEntity(Task entity, TaskRequest req) {
         if (entity == null || req == null) return;
-        if (req.title() != null) entity.setTitle(req.title());
-        // description and dueDate may be null to clear the field
+        if (req.title() != null && !req.title().isBlank()) entity.setTitle(req.title());
+
         entity.setDescription(req.description());
         entity.setDueDate(req.dueDate());
         if (req.status() != null) entity.setStatus(req.status());
@@ -48,15 +45,4 @@ public final class TaskMapper {
     }
 }
 
-
-record TaskResponse(
-    Long id,
-    String title,
-    String description,
-    TaskStatus status,
-    TaskPriority priority,
-    LocalDate dueDate,
-    Instant createdAt,
-    Instant updatedAt
-) {}
 
