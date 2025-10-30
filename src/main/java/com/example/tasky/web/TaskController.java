@@ -3,6 +3,7 @@ package com.example.tasky.web;
 import com.example.tasky.domain.TaskStatus;
 import com.example.tasky.service.TaskService;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -48,7 +49,7 @@ public class TaskController {
     public Page<TaskResponse> list(
             @RequestParam(required = false) TaskStatus status,
             @RequestParam(required = false) String q,
-            @PageableDefault(size = 10, sort = "createdAt") Pageable pageable
+            @ParameterObject @PageableDefault(size = 10, sort = "createdAt") Pageable pageable
     ) {
         return service.list(status, q, pageable);
     }
