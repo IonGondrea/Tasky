@@ -1,6 +1,6 @@
 package com.example.tasky.service;
 
-import com.example.tasky.TaskRepository;
+import com.example.tasky.repo.TaskRepository;
 import com.example.tasky.domain.Task;
 import com.example.tasky.domain.TaskStatus;
 import com.example.tasky.web.TaskMapper;
@@ -25,14 +25,14 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    @Transactional
     public TaskResponse create(TaskRequest request) {
         Task entity = TaskMapper.toEntity(request);
         Task saved = repository.save(entity);
         return TaskMapper.toResponse(saved);
     }
-    @Transactional
+
     @Override
+    @Transactional
     public TaskResponse update(Long id, TaskRequest request) {
         Task entity = repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
@@ -42,12 +42,14 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional
     public TaskResponse findById(Long id) {
         Task entity = repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
         return TaskMapper.toResponse(entity);
     }
-    @Transactional
+
+
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found");

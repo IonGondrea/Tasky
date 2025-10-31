@@ -1,4 +1,4 @@
-package com.example.tasky;
+package com.example.tasky.repo;
 
 import com.example.tasky.domain.Task;
 import com.example.tasky.domain.TaskStatus;

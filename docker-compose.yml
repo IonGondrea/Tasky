@@ -1,0 +1,16 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: tasky-mysql
+    environment:
+      MYSQL_DATABASE: tasky
+      MYSQL_USER: tasky
+      MYSQL_PASSWORD: tasky
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - tasky_mysql:/var/lib/mysql
+    command: ["--default-authentication-plugin=mysql_native_password"]
+volumes:
+  tasky_mysql:

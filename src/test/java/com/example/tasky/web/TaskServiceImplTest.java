@@ -1,6 +1,6 @@
 package com.example.tasky.web;
 
-import com.example.tasky.TaskRepository;
+import com.example.tasky.repo.TaskRepository;
 import com.example.tasky.domain.Task;
 import com.example.tasky.domain.TaskPriority;
 import com.example.tasky.domain.TaskStatus;
