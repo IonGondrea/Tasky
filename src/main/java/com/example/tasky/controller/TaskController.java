@@ -1,7 +1,9 @@
-package com.example.tasky.web;
+package com.example.tasky.controller;
 
 import com.example.tasky.domain.TaskStatus;
 import com.example.tasky.service.TaskService;
+import com.example.tasky.web.TaskRequest;
+import com.example.tasky.web.TaskResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -32,7 +34,8 @@ public class TaskController {
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Task creat cu succes"),
             @ApiResponse(responseCode = "400", description = "Date invalide")
-    })    @PostMapping
+    })
+    @PostMapping
     public ResponseEntity<TaskResponse> create(@Valid @RequestBody TaskRequest request) {
         TaskResponse created = service.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);

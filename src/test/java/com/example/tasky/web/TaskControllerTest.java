@@ -1,5 +1,6 @@
 package com.example.tasky.web;
 
+import com.example.tasky.controller.TaskController;
 import com.example.tasky.domain.TaskPriority;
 import com.example.tasky.domain.TaskStatus;
 import com.example.tasky.service.TaskService;
@@ -24,7 +25,8 @@ class TaskControllerTest {
 
     @Mock TaskService service;
 
-    @InjectMocks TaskController controller;
+    @InjectMocks
+    TaskController controller;
 
     MockMvc mvc;
 

@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
-@Transactional(readOnly = true)
 public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository repository;
@@ -25,6 +24,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+
     public TaskResponse create(TaskRequest request) {
         Task entity = TaskMapper.toEntity(request);
         Task saved = repository.save(entity);
