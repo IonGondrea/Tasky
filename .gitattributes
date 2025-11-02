@@ -1,2 +1,42 @@
-/mvnw text eol=lf
-*.cmd text eol=crlf
+# ---------------------------------------------------------
+# 🌐 GitHub Linguist Language Detection
+# ---------------------------------------------------------
+# Ignoră fișierele TypeScript vechi și build-urile generate
+*.ts linguist-detectable=false
+*.tsx linguist-detectable=false
+*.d.ts linguist-detectable=false
+dist/** linguist-detectable=false
+build/** linguist-detectable=false
+node_modules/** linguist-detectable=false
+.vite/** linguist-detectable=false
+
+# Prioritizează JavaScript și JSX pentru frontend
+*.js linguist-language=JavaScript
+*.jsx linguist-language=JavaScript
+*.css linguist-language=CSS
+*.html linguist-language=HTML
+
+# ---------------------------------------------------------
+# 🧩 Text normalization (end of line & encoding)
+# ---------------------------------------------------------
+* text=auto
+*.js text eol=lf
+*.jsx text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.java text eol=lf
+*.md text eol=lf
+
+# ---------------------------------------------------------
+# ⚙️ Back-end (Spring Boot)
+# ---------------------------------------------------------
+*.java linguist-language=Java
+*.properties linguist-language=Java
+*.yml linguist-language=Java
+
+# ---------------------------------------------------------
+# 🧠 Documentation
+# ---------------------------------------------------------
+*.md linguist-documentation=true
+LICENSE linguist-documentation=true
+README.md linguist-documentation=true
