@@ -1,5 +1,7 @@
+version: "3.9"
+
 services:
-  mysql:
+  db:
     image: mysql:8.0
     container_name: tasky-mysql
     environment:
@@ -10,7 +12,32 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - tasky_mysql:/var/lib/mysql
-    command: ["--default-authentication-plugin=mysql_native_password"]
+      - tasky_data:/var/lib/mysql
+
+  api:
+    build:
+      context: .               # ← punctul înseamnă „rădăcina actuală”
+      dockerfile: Dockerfile   # ← fișierul tău de backend din rădăcină
+    container_name: tasky-api
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/tasky?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: tasky
+      SPRING_DATASOURCE_PASSWORD: tasky
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "8080:8080"
+
+  ui:
+    build:
+      context: ./tasky-ui      # ← frontendul tău
+      dockerfile: Dockerfile
+    container_name: tasky-ui
+    depends_on:
+      - api
+    ports:
+      - "5173:80"
+
 volumes:
-  tasky_mysql:
+  tasky_data:
