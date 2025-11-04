@@ -1,4 +1,4 @@
-version: "3.9"
+
 
 services:
   db:
@@ -9,35 +9,48 @@ services:
       MYSQL_USER: tasky
       MYSQL_PASSWORD: tasky
       MYSQL_ROOT_PASSWORD: root
+      TZ: Europe/Bucharest
     ports:
       - "3306:3306"
     volumes:
       - tasky_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ptasky"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
 
   api:
     build:
-      context: .               # ← punctul înseamnă „rădăcina actuală”
-      dockerfile: Dockerfile   # ← fișierul tău de backend din rădăcină
+      context: .               # backend Dockerfile în rădăcină
+      dockerfile: Dockerfile
     container_name: tasky-api
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/tasky?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: tasky
       SPRING_DATASOURCE_PASSWORD: tasky
       SPRING_PROFILES_ACTIVE: dev
+      TZ: Europe/Bucharest
     ports:
       - "8080:8080"
 
   ui:
     build:
-      context: ./tasky-ui      # ← frontendul tău
+      context: ./tasky-ui      # frontend Dockerfile în /tasky-ui
       dockerfile: Dockerfile
     container_name: tasky-ui
     depends_on:
       - api
+    environment:
+      # dacă folosești Vite, expune baza API-ului așa și citește-o din import.meta.env.VITE_API_URL
+      VITE_API_URL: http://localhost:8080
     ports:
       - "5173:80"
+
 
 volumes:
   tasky_data:

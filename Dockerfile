@@ -1,14 +1,15 @@
-# === Build stage ===
-FROM maven:3.9.9-eclipse-temurin-21 AS build
+# Build stage (Debian, not Alpine)
+FROM --platform=linux/amd64 node:20-bullseye-slim AS build
 WORKDIR /app
-COPY pom.xml .
-RUN mvn dependency:go-offline -B
-COPY src/main/java/com/example/tasky .
-RUN mvn clean package -DskipTests
+COPY package*.json ./
+RUN npm ci || npm install
+COPY . .
+RUN npm run build   # pentru Vite -> dist; pentru CRA -> build
 
-# === Run stage ===
-FROM eclipse-temurin:21-jre
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Runtime stage (Nginx Debian)
+FROM --platform=linux/amd64 nginx:1.27-bookworm
+# Vite:
+COPY --from=build /app/dist /usr/share/nginx/html
+# (dacă e Create React App, schimbă în /app/build)
+EXPOSE 80
+CMD ["nginx","-g","daemon off;"]

@@ -17,8 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 
-
+@CrossOrigin(origins = "*")
 @Validated
 @RestController
 @RequestMapping("/api/v1/tasks")
@@ -85,4 +86,5 @@ public class TaskController {
     ) {
         return service.list(status, q, pageable);
     }
+
 }
