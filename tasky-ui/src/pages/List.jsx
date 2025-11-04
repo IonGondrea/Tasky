@@ -4,8 +4,6 @@ import TaskCard from '../components/TaskCard'
 import { Link, useLocation } from 'react-router-dom'
 import { useToasts } from '../components/Toasts'
 
-// `list` kept for backwards-compat; `getAll` is the canonical name
-
 export default function List() {
   const [tasks, setTasks] = useState([])
   const [page, setPage] = useState(0)

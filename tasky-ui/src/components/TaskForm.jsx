@@ -19,7 +19,6 @@ export default function TaskForm({ initial, onSubmit }) {
   async function submit(values) {
     try {
       setServerError(null)
-      // client-side validation: title required, <=20 chars
       if (!values.title || values.title.trim() === '') return // react-hook-form should handle
       if (values.title.length > 20) return
       await onSubmit({
@@ -33,7 +32,6 @@ export default function TaskForm({ initial, onSubmit }) {
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
         if (err.response.status === 400 || err.response.status === 409) {
-          // show inline error next to title for 400/409
           const msg = err.response.data?.message || 'Validation error'
           setServerError(msg)
           return

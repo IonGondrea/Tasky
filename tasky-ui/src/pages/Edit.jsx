@@ -1,9 +1,7 @@
-// UI: Edit page uses same glass panel as Create; form prefilled
-
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import TaskForm from '../components/TaskForm'
-import { get, update } from '../api/tasks' // tasks.js exports `get` and `update` to match prior usage
+import { get, update } from '../api/tasks'
 import { useToasts } from '../components/Toasts'
 
 export default function Edit() {

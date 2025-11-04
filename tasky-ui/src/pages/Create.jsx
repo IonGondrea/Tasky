@@ -5,7 +5,6 @@
 import React from 'react'
 import TaskForm from '../components/TaskForm'
 import { create } from '../api/tasks'
-// tasks.js exports `create` function
 import { useNavigate } from 'react-router-dom'
 import { useToasts } from '../components/Toasts'
 

@@ -1,7 +1,3 @@
-// UI: Toast provider styled to match dark glass theme
-// - Top-right stacked toasts
-// - Glass container look for each toast, semantic colors for success/error/info
-
 import React, { useState, createContext, useContext } from 'react'
 
 const ToastContext = createContext(null)
@@ -23,7 +19,6 @@ export function ToastProvider({ children }) {
     <ToastContext.Provider value={{ show }}>
       {children}
 
-      {/* Top-right toast stack */}
       <div className="fixed top-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
         {toasts.map(t => {
           const base = 'pointer-events-auto w-full max-w-sm rounded-2xl p-3 shadow-lg backdrop-blur-lg border border-white/10'

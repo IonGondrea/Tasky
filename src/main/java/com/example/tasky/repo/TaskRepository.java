@@ -13,9 +13,6 @@ import org.springframework.stereotype.Repository;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    Page<Task> findByStatus(TaskStatus status, Pageable pageable);
-
-    Page<Task> findByTitleContainingIgnoreCase(String q, Pageable pageable);
 
     @Query("""
         select t from Task t

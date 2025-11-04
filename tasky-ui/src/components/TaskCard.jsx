@@ -1,10 +1,6 @@
-// UI: Task card restyle to glassmorphism with responsive full-width
-// - Use semantic colored chips for status & priority
-// - Modern rounded action buttons
-
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { remove, deleteTask } from '../api/tasks' // tasks.js exports `remove` (canonical) and `deleteTask` (backcompat)
+import { remove, deleteTask } from '../api/tasks'
 
 export default function TaskCard({ task, onDeleted }) {
   const [confirmOpen, setConfirmOpen] = React.useState(false)

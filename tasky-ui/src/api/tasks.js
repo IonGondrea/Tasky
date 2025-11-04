@@ -1,4 +1,3 @@
-// JS API client for tasks (replaces TS module)
 import { api } from './http'
 
 export async function getAll({ status, q, page = 0, size = 10 } = {}) {
@@ -26,7 +25,6 @@ export async function remove(id) {
   return res.data
 }
 
-// Backwards-compatible named exports used earlier in some files
 export const list = getAll
 export const getTask = get
 export const createTask = create
