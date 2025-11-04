@@ -44,8 +44,6 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-mysql</artifactId>
-            <!-- dacă folosești Spring Boot 3.2.x / 3.3.x, poți lăsa fără <version> și va fi gestionată de BOM-ul Boot;
-                 dacă îți cere versiune, pune aceeași ca flyway-core (ex: 10.x.y) -->
         </dependency>
 
         <dependency>
@@ -98,11 +96,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <!-- păstrează orice argLine existent -->
-                    <argLine>
-                        @{argLine}
-                        -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
-                    </argLine>
+
+
                 </configuration>
             </plugin>
 
