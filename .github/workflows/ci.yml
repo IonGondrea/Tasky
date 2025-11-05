@@ -49,8 +49,17 @@ jobs:
           cache: 'npm'
           cache-dependency-path: tasky-ui/package-lock.json
 
-      - name: Install dependencies
+      - name: Debug: node & npm versions
+        run: |
+          node -v
+          npm -v
+
+      - name: Install dependencies (CI)
         run: npm ci
+
+      - name: Debug: list installed key packages
+        run: |
+          npm ls tailwindcss postcss autoprefixer || true
 
       - name: Build
         run: npm run build
